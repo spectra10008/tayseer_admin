@@ -31,6 +31,7 @@ class StoreVendorRequest extends FormRequest
             "sale_info"=>"string",
             "latitude"=>"required|string|max:255",
             "longitude"=>"required|string|max:255",
+            "mfi_provider_id"=>'required|numeric|exists:mfi_providers,id',
             "profile_pic"=>'nullable|mimes:jpeg,png,jpg|max:2048',
         ];
     }

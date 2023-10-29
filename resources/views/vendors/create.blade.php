@@ -49,6 +49,18 @@
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
+                                                <label for="first-name-vertical">مؤسسة التمويل</label>
+                                                <select class="select2 form-control" name="mfi_provider_id" required>
+                                                    <option value="">إختار</option>
+                                                    @foreach ($mfis as $mfi)
+                                                        <option value="{{ $mfi->id }}"@selected($mfi->id == old('mfi_provider_id'))>
+                                                            {{ $mfi->name_ar }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
                                                 <label for="first-name-vertical">إسم التاجر</label>
                                                 <input type="text"
                                                     class="form-control @error('name') is-invalid @enderror"
@@ -149,7 +161,7 @@
         });
     </script>
     <script
-        src="https://maps.google.com/maps/api/js?key=AIzaSyCgBcmRxPDyddm0cL8jqRm9ZMGKRtFpw78&libraries=places&callback=initAutocomplete"
+        src="https://maps.google.com/maps/api/js?key=AIzaSyA-CFZMuoj6iTzpFJCGUrQUmrQuuw-ZZiE&libraries=places&callback=initAutocomplete"
         type="text/javascript"></script>
 
     <script>

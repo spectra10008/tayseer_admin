@@ -130,7 +130,7 @@
             </div>
             @endif
             <!-- permissions start -->
-            <div class="col-6">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header border-bottom mx-2 px-0">
                         <h6 class="border-bottom py-1 mb-0 font-medium-2"><i class="fa fa-users mr-50 "></i>المشتركين في المشروع
@@ -145,7 +145,6 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th></th>
                                         <th>اسم المستفيد</th>
                                         <th>البريد الالكتروني</th>
                                         <th>رقم الهاتف</th>
@@ -157,20 +156,11 @@
                                     @foreach ($project->beneficiary_project as $key => $beneficiary)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        @php($img = Str::substr($beneficiary->beneficiary->image, 7))
+                                        <td>{{ $beneficiary->name }}</td>
+                                        <td>{{ $beneficiary->email }}</td>
+                                        <td>{{ $beneficiary->phone }}</td>
+                                        <td>{{ $beneficiary->age }}</td>
                                         <td>
-                                            <div class="avatar avatar-xl">
-                                                <img src="{{ asset('storage/'.$img) }}" alt="avtar img holder" style="object-fit: cover">
-                                            </div>
-                                        </td>
-                                        <td>{{ $beneficiary->beneficiary->name }}</td>
-                                        <td>{{ $beneficiary->beneficiary->email }}</td>
-                                        <td>{{ $beneficiary->beneficiary->phone }}</td>
-                                        <td>{{ $beneficiary->beneficiary->age }}</td>
-                                        <td>
-                                            <a href="/panel-admin/beneficiaries/{{$beneficiary->beneficiary->id}}" class="btn btn-info">
-                                                <i class="fa fa-info-circle"></i>
-                                            </a>
                                             <a href="/panel-admin/delete-beneficiaries-project/{{ $beneficiary->id }}" class="btn btn-danger mr-2"
                                             onclick="if(confirm('هل أنت متأكد ؟')){document.getElementById('delete-users_{{ $beneficiary->id }}').submit();}else{
                                     event.preventDefault();}"><i
@@ -236,12 +226,32 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">اختار</label>
-                                        <select class="select2 form-control" multiple="multiple" name="beneficiary_id[]" required>
-                                            @foreach ($beneficiaries as $beneficiary)
-                                                <option value="{{$beneficiary->id}}">{{$beneficiary->name}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="first-name-vertical">الاسم</label>
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">البريد الالكتروني</label>
+                                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">رقم الهاتف</label>
+                                        <input type="number" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">العمر</label>
+                                        <input type="number" name="age" class="form-control @error('age') is-invalid @enderror" value="{{ old('age') }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">العنوان</label>
+                                        <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-12">

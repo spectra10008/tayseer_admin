@@ -39,4 +39,34 @@ class FormRequest extends Model
     {
         return $this->hasMany(FormRequestFile::class,'request_id','id');
     }
+
+    public function mfi_provider()
+    {
+        return $this->belongsTo(MfiProvider::class,'mfi_provider_id','id');
+    }
+
+    public function operation()
+    {
+        return $this->belongsTo(User::class,'operation_id','id');
+    }
+
+    public function technical_expert()
+    {
+        return $this->belongsTo(User::class,'technical_expert_id','id');
+    }
+
+    public function beneficiary()
+    {
+        return $this->belongsTo(Beneficiary::class,'beneficiary_id','id');
+    }
+
+
+    public function form_notes()
+    {
+        return $this->hasMany(FormNote::class,'request_id','id');
+    }
+    public function mfi_notes()
+    {
+        return $this->hasMany(MfiFormNote::class,'form_request_id','id');
+    }
 }

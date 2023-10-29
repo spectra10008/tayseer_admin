@@ -1,4 +1,4 @@
-<form class="form form-vertical" action="/admin/users/{{ $user->id }}" method="POST" enctype="multipart/form-data">
+<form class="form form-vertical" action="/panel-admin/users/{{ $user->id }}" method="POST" enctype="multipart/form-data">
     @method('PATCH')
     @csrf
     <input type="hidden" value="{{ $user->id }}" name="id">
@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="email-id-vertical">كلمة السر</label>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
-                        placeholder="كلمة السر" value="{{ old('password') }}" required>
+                        placeholder="كلمة السر" value="{{ old('password') }}">
                 </div>
             </div>
             <div class="col-6">

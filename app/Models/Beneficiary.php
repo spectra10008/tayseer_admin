@@ -29,6 +29,6 @@ class Beneficiary extends Model
 
     public function beneficiary_requests()
     {
-        return $this->hasMany(BeneficiaryRequest::class,'beneficiary_id','id');
+        return $this->hasMany(FormRequest::class,'beneficiary_id','id');
     }
 }

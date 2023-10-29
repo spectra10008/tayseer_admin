@@ -59,7 +59,7 @@
                                                 @endif
                                             </td>
                                             @php($name = $group->beneficiary_group->where('is_leader',1)->first())
-                                            <td>{{ $name->beneficiary->name }}</td>
+                                            <td>{{ $name->beneficiary->name ?? '-' }}</td>
                                             <td>
                                                 <a href="/panel-admin/groups/{{$group->id}}" class="btn btn-info">
                                                     <i class="fa fa-info-circle"></i>

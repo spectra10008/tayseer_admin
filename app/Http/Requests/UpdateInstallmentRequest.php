@@ -13,7 +13,7 @@ class UpdateInstallmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateInstallmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'deserved_amount' => 'required|numeric',
+            'date_payment_installment' => 'required|after_or_equal:today',
+            'mfi_provider_id' => 'required|numeric|exists:mfi_providers,id',
+            'status_id' => 'required|numeric|exists:installment_statuses,id',
+            'receipt_file' => 'nullable|mimes:jpeg,png,pdf|max:2048',
         ];
     }
 }

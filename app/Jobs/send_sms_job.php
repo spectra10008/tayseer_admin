@@ -36,6 +36,6 @@ class send_sms_job implements ShouldQueue
     public function handle()
     {
 
-        $this->send_msg($this->request_info->phone,$this->sms_content,$this->request_info->id);
+        $this->send_msg($this->request_info->beneficiary->phone,$this->sms_content,$this->request_info->id);
     }
 }

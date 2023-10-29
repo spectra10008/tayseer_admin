@@ -47,7 +47,7 @@
                                     </tr>
                                     <tr>
                                         <td class="font-weight-bold">البريد الألكتروني</td>
-                                        <td>{{ $beneficiary->email }}</td>
+                                        <td>{{ $beneficiary->email ?? '-' }}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-weight-bold">رقم الهاتف</td>
@@ -235,10 +235,6 @@
                                 <thead>
                                     <tr>
                                         <th>رقم الطلب</th>
-                                        <th>اسم المستفيد</th>
-                                        <th>البريد الالكتروني</th>
-                                        <th>رقم الهاتف</th>
-                                        <th>العمر</th>
                                         <th>حالة الطلب</th>
                                         <th>تاريخ الإنشاء</th>
                                         <th>خياراتي</th>
@@ -248,27 +244,29 @@
                                     @if($beneficiary->beneficiary_requests->count() != 0)
                                         @foreach ($beneficiary->beneficiary_requests as $key => $form_request)
                                             <tr>
-                                                <td>{{ $form_request->requests->id }}</td>
-                                                <td>{{ $form_request->requests->name }}</td>
-                                                <td>{{ $form_request->requests->email }}</td>
-                                                <td>{{ $form_request->requests->phone }}</td>
-                                                <td>{{ $form_request->requests->age }}</td>
+                                                <td>{{ $form_request->id }}</td>
                                                 <td>
-                                                    @if ($form_request->requests->status_id == 1)
-                                                    <span class="badge badge-info">{{$form_request->requests->status->status_desc}}</span>
-                                                    @elseif($form_request->requests->status_id == 2)
-                                                    <span class="badge badge-light">
-                                                        {{$form_request->requests->status->status_desc}}</span>
-                                                    @elseif($form_request->requests->status_id == 3)
-                                                        <span class="badge badge-success">
-                                                            {{$form_request->requests->status->status_desc}}</span>
-                                                    @elseif($form_request->requests->status_id == 4)
-                                                    <span class="badge badge-danger">{{$form_request->requests->status->status_desc}}</span>
+                                                    @if ($form_request->status_id == 1)
+                                                    <span class="badge badge-info">{{$form_request->status->status_desc}}</span>
+                                                    @elseif($form_request->status_id == 2)
+                                                    <span class="badge badge-info">
+                                                        {{$form_request->status->status_desc}}</span>
+                                                    @elseif($form_request->status_id == 3)
+                                                        <span class="badge badge-primary">
+                                                            {{$form_request->status->status_desc}}</span>
+                                                    @elseif($form_request->status_id == 4)
+                                                    <span class="badge badge-primary">{{$form_request->status->status_desc}}</span>
+                                                    @elseif($form_request->status_id == 5)
+                                                    <span class="badge badge-success">{{$form_request->status->status_desc}}</span>
+                                                    @elseif($form_request->status_id == 6)
+                                                    <span class="badge badge-danger">{{$form_request->status->status_desc}}</span>
+                                                    @elseif($form_request->status_id == 7)
+                                                    <span class="badge badge-default">{{$form_request->status->status_desc}}</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ $form_request->requests->created_at->format('Y-m-d') }}</td>
+                                                <td>{{ $form_request->created_at->format('Y-m-d') }}</td>
                                                 <td>
-                                                    <a href="/panel-admin/form-requets/{{$form_request->requests->id}}" class="btn btn-info">
+                                                    <a href="/panel-admin/form-requets/{{$form_request->id}}" class="btn btn-info">
                                                         <i class="fa fa-info-circle"></i>
                                                     </a>
                                                 </td>
@@ -335,9 +333,9 @@
     </div>
 @endsection
 @section('scriptjs')
-    <script
-        src="https://maps.google.com/maps/api/js?key=AIzaSyCgBcmRxPDyddm0cL8jqRm9ZMGKRtFpw78&libraries=places&callback=initAutocomplete"
-        type="text/javascript"></script>
+<script
+src="https://maps.google.com/maps/api/js?key=AIzaSyA-CFZMuoj6iTzpFJCGUrQUmrQuuw-ZZiE&libraries=places&callback=initAutocomplete"
+type="text/javascript"></script>
 
     <script>
         $(document).ready(function() {

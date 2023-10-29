@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('beneficiary_projects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained('projects');
-            $table->foreignId('beneficiary_id')->constrained('beneficiaries');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email')->unique();
+            $table->string('address');
+            $table->integer('age');
             $table->timestamps();
         });
     }

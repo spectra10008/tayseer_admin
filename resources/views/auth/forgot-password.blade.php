@@ -39,9 +39,20 @@
     <!-- END: Custom CSS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap"
-        rel="stylesheet">
-    <!-- END: Custom CSS-->
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <style>
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        span,
+        body {
+            font-family: 'Almarai', sans-serif !important;
+        }
+    </style>
 
 </head>
 <!-- END: Head-->
@@ -101,7 +112,7 @@
                                                         <label for="inputEmail">البريد الألكتروني</label>
                                                     </div>
                                                     <div class="float-md-left d-block mb-1">
-                                                        <a href="/admin/login"
+                                                        <a href="/panel-admin/login"
                                                             class="btn btn-outline-primary btn-block px-75">الرجوع
                                                             لتسجيل الدخول</a>
                                                     </div>

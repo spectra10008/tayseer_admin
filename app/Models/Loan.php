@@ -15,8 +15,23 @@ class Loan extends Model
         return $this->belongsTo(LoanProduct::class,'product_id','id');
     }
 
+    public function request()
+    {
+        return $this->belongsTo(FormRequest::class,'request_id','id');
+    }
+
     public function status()
     {
-        return $this->belongsTo(LoanStatus::class,'id','status_id');
+        return $this->belongsTo(LoanStatus::class,'status_id','id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(MfiProviderUser::class,'loan_manager','id');
+    }
+
+    public function mfi_provider()
+    {
+        return $this->belongsTo(MfiProvider::class,'mfi_provider_id','id');
     }
 }

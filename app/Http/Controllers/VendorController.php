@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vendor;
 use App\Http\Requests\StoreVendorRequest;
 use App\Http\Requests\UpdateVendorRequest;
+use App\Models\MfiProvider;
 
 class VendorController extends Controller
 {
@@ -28,7 +29,9 @@ class VendorController extends Controller
      */
     public function create()
     {
+        $mfis = MfiProvider::where('is_active',1)->get();
         return view('vendors.create')
+        ->with('mfis',$mfis)
         ;
     }
 
@@ -46,6 +49,7 @@ class VendorController extends Controller
         $vendors->phone = $request->phone;
         $vendors->address = $request->address;
         $vendors->sale_info = $request->sale_info;
+        $vendors->mfi_provider_id = $request->mfi_provider_id;
         $vendors->location = $request->latitude.','.$request->longitude;
         $path = $request->file('profile_pic')->store('public/vendors');
         $vendors->profile_pic = $path;
@@ -95,6 +99,7 @@ class VendorController extends Controller
         $vendor->phone = $request->phone;
         $vendor->address = $request->address;
         $vendor->sale_info = $request->sale_info;
+        $vendor->mfi_provider_id = $request->mfi_provider_id;
         $vendor->location = $request->latitude.','.$request->longitude;
         if(isset($request->profile_pic) && $request->profile_pic != null)
         {

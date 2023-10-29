@@ -62,7 +62,7 @@
                                     <tr>
                                         <td class="font-weight-bold">قائد المجموعة</td>
                                         <td>
-                                            {{ $name->beneficiary->name  }}
+                                            {{ $name->beneficiary->name ?? '-'  }}
                                         </td>
                                     </tr>
                                     <tr>

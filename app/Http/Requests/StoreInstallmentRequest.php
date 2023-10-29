@@ -24,8 +24,8 @@ class StoreInstallmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'request_id' => 'required|numeric|exists:form_requests,id',
-            'beneficiary_id' => 'required|numeric|exists:beneficiaries,id',
+            'loan_id' => 'required|numeric|exists:loans,id',
+            'mfi_provider_id' => 'required|numeric|exists:mfi_providers,id',
             'deserved_amount' => 'required|numeric',
             'date_payment_installment' => 'required|after_or_equal:today',
         ];

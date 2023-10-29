@@ -24,5 +24,8 @@ return array(
     */
 
     'options' => array(
+        'closeButton'       => true,
+        'closeClass'        => 'toast-close-button',
+        'closeDuration'     => 5000,
     ),
 );

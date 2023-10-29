@@ -73,7 +73,7 @@
                                             event.preventDefault();}"><i
                                                         class="fa fa-trash"></i></button>
                                                 <form id="delete-users_{{ $user->id }}"
-                                                    action="/admin/users/{{ $user->id }}" method="POST"
+                                                    action="/panel-admin/users/{{ $user->id }}" method="POST"
                                                     class="d-none">
                                                     @csrf
                                                     @method('DELETE')
@@ -102,7 +102,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form form-vertical" action="/admin/users" method="POST" enctype="multipart/form-data">
+                    <form class="form form-vertical" action="/panel-admin/users" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-body">
                             <div class="row">
@@ -211,7 +211,7 @@
                 $(".form-section").append(
                     "<center><img src='{{ asset('loader.gif') }}'  width='300px'/></center>"
                 );
-                $.get("/admin/users/" + edit_val + "/edit", function(data, status) {
+                $.get("/panel-admin/users/" + edit_val + "/edit", function(data, status) {
                     $(".form-section").html(data);
                 }).fail(function() {
                     $(".form-section").html(" ");

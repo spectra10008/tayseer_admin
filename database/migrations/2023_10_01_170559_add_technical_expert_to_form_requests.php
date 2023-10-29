@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('installments', function (Blueprint $table) {
-            $table->foreignId('request_id')->constrained('form_requests');
-            $table->foreignId('added_by')->constrained('users');
+        Schema::table('form_requests', function (Blueprint $table) {
+            $table->foreignId('operation_id')->constrained('users')->nullable();
+            $table->foreignId('technical_expert_id')->constrained('users')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('installments', function (Blueprint $table) {
+        Schema::table('form_requests', function (Blueprint $table) {
             //
         });
     }

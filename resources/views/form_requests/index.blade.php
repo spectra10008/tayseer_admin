@@ -15,7 +15,9 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">طلبات التمويل </h4>
+                    @if(Auth::user()->user_type_id == 1)
                     <a href="/panel-admin/form-requets/create" class="btn btn-primary">إضافة </a>
+                    @endif
                 </div>
 
                 <div class="card-content">
@@ -48,22 +50,28 @@
                                     @foreach ($form_requests as $key => $form_request)
                                         <tr>
                                             <td>{{ ++$key }}</td>
-                                            <td>{{ $form_request->id }}</td>
-                                            <td>{{ $form_request->name }}</td>
-                                            <td>{{ $form_request->email }}</td>
-                                            <td>{{ $form_request->phone }}</td>
-                                            <td>{{ $form_request->age }}</td>
+                                            <td>{{ $form_request->form_request_id }}</td>
+                                            <td>{{ $form_request->beneficiary->name }}</td>
+                                            <td>{{ $form_request->beneficiary->email ?? '-' }}</td>
+                                            <td>{{ $form_request->beneficiary->phone }}</td>
+                                            <td>{{ $form_request->beneficiary->age }}</td>
                                             <td>
                                                 @if ($form_request->status_id == 1)
                                                 <span class="badge badge-info">{{$form_request->status->status_desc}}</span>
                                                 @elseif($form_request->status_id == 2)
-                                                <span class="badge badge-light">
+                                                <span class="badge badge-info">
                                                     {{$form_request->status->status_desc}}</span>
                                                 @elseif($form_request->status_id == 3)
-                                                    <span class="badge badge-success">
+                                                    <span class="badge badge-primary">
                                                         {{$form_request->status->status_desc}}</span>
                                                 @elseif($form_request->status_id == 4)
+                                                <span class="badge badge-primary">{{$form_request->status->status_desc}}</span>
+                                                @elseif($form_request->status_id == 5)
+                                                <span class="badge badge-success">{{$form_request->status->status_desc}}</span>
+                                                @elseif($form_request->status_id == 6)
                                                 <span class="badge badge-danger">{{$form_request->status->status_desc}}</span>
+                                                @elseif($form_request->status_id == 7)
+                                                <span class="badge badge-default">{{$form_request->status->status_desc}}</span>
                                                 @endif
                                             </td>
                                             <td>{{ $form_request->created_at->format('Y-m-d') }}</td>

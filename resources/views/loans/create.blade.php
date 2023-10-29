@@ -3,8 +3,9 @@
 @section('content')
     <section id="basic-vertical-layouts">
         <div class="row match-height">
-            @if ($errors->any())
-                <div class="alert alert-danger">
+            <div class="col-md-12 col-12">
+                @if ($errors->any())
+                <div class="alert alert-danger mb-2">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -12,24 +13,23 @@
                     </ul>
                 </div>
             @endif
-            <div class="col-md-12 col-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">القروض</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-vertical" action="/panel-admin/loans-products" method="POST">
+                            <form class="form form-vertical" action="/panel-admin/loans" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">طلب التمويل</label>
-                                                <select name="request_id" class="form-control @error('request_id') is-invalid @enderror" id="" required>
+                                                <select name="request_id" class="form-control @error('request_id') is-invalid @enderror select2" id="" required>
                                                     <option value="">إختار</option>
                                                     @foreach ($form_requests as $form_request)
-                                                    <option value="{{$form_request->id}}" @selected($form_request->id == old('request_id'))>{{$form_request->name}}</option>
+                                                    <option value="{{$form_request->id}}" @selected($form_request->id == old('request_id'))>{{$form_request->form_request_id}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -75,10 +75,10 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">فائدة كل : </label>
-                                                <select name="product_id" class="form-control @error('product_id') is-invalid @enderror" id="" required>
+                                                <select name="loan_interest_per" class="form-control @error('loan_interest_per') is-invalid @enderror" id="" required>
                                                     <option value="">إختار</option>
-                                                    <option value="Month">Month</option>
-                                                    <option value="Year">Year</option>
+                                                    <option value="Month"  @selected(old('loan_interest_per') == "Month")>شهور</option>
+                                                    <option value="Year"  @selected(old('loan_interest_per') == "Year")>سنة</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -89,6 +89,17 @@
                                                     class="form-control @error('loan_duration') is-invalid @enderror"
                                                     name="loan_duration" placeholder=" مدة القرض / بالشهور"
                                                     value="{{ old('loan_duration') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">مؤسسة التمويل</label>
+                                                <select name="mfi_provider_id" class="form-control @error('mfi_provider_id') is-invalid @enderror">
+                                                    <option value="">إختار</option>
+                                                    @foreach($mfis as $key => $mfi)
+                                                    <option value="{{ $mfi->id }}"@selected(old('mfi_provider_id') == $mfi->id )>{{ $mfi->name_ar }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -111,7 +122,7 @@
                                                 <select name="loan_manager" class="form-control @error('loan_manager') is-invalid @enderror" id="" required>
                                                     <option value="">إختار</option>
                                                     @foreach ($users as $user)
-                                                    <option value="{{$user->id}}" @selected($user->id == old('loan_manager'))>{{$user->product_name}}</option>
+                                                    <option value="{{$user->id}}" @selected($user->id == old('loan_manager'))>{{$user->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

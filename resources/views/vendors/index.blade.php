@@ -36,6 +36,7 @@
                                         <th>#</th>
                                         <th></th>
                                         <th>اسم التاجر</th>
+                                        <th>اسم مؤسسةالتمويل</th>
                                         <th>البريد الالكتروني</th>
                                         <th>رقم الهاتف</th>
                                         <th>العنوان</th>
@@ -53,6 +54,7 @@
                                                 </div>
                                             </td>
                                             <td>{{ $vendor->name }}</td>
+                                            <td>{{ $vendor->mfis->name_ar }}</td>
                                             <td>{{ $vendor->email }}</td>
                                             <td>{{ $vendor->phone }}</td>
                                             <td>{{ $vendor->address }}</td>

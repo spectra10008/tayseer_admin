@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Providers\Auth\LoginController as ProviderLogin;
 
 Route::prefix('panel-admin')->middleware('guest')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
@@ -53,3 +54,15 @@ Route::prefix('panel-admin')->middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
+
+
+
+Route::prefix('panel-mfi')->group(function () {
+    Route::get('login', [ProviderLogin::class, 'create'])->name('panel-mfi.login');
+    Route::post('login', [ProviderLogin::class, 'store']);
+});
+
+Route::prefix('panel-mfi')->middleware('auth:mfis_providers')->group(function () {
+    Route::post('logout', [ProviderLogin::class, 'destroy']);
+});
+

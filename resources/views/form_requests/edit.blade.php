@@ -50,116 +50,16 @@
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label for="first-name-vertical">إسم مستفيد</label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="اسم مستفيد" value="{{ old('name',$formRequest->name) }}" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">الجنس</label>
-                                                <select name="gender" class="form-control @error('gender') is-invalid @enderror">
+                                                <label for="first-name-vertical">المستفيد</label>
+                                                <select name="beneficiary_id"
+                                                    class="form-control select2 @error('beneficiary_id') is-invalid @enderror">
                                                     <option value="">إختار</option>
-                                                    <option value="male"@selected(old('gender',$formRequest->gender) == 'male')>ذكر</option>
-                                                    <option value="female"@selected(old('gender',$formRequest->gender) == 'female')>أنثى</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">البريد الألكتروني</label>
-                                                <input type="email"
-                                                    class="form-control @error('email') is-invalid @enderror"
-                                                    name="email" placeholder="البريد الألكتروني" value="{{ old('email',$formRequest->email) }}"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">رقم الهاتف</label>
-                                                <input type="number"
-                                                    class="form-control @error('phone') is-invalid @enderror"
-                                                    name="phone" placeholder="رقم الهاتف" value="{{ old('phone',$formRequest->phone) }}"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">العمر</label>
-                                                <input type="number" class="form-control @error('age') is-invalid @enderror" name="age" placeholder="العمر" value="{{ old('age',$formRequest->age) }}"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">الرقم الوطني</label>
-                                                <input type="number" class="form-control @error('id_number') is-invalid @enderror" name="id_number" placeholder="الرقم الوطني" value="{{ old('id_number',$formRequest->id_number) }}"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">الحالة الاجتماعية</label>
-                                                <select name="social_situation_id" class="form-control @error('social_situation_id') is-invalid @enderror" required>
-                                                    <option value="">إختار</option>
-                                                    @foreach ($statuses as $status)
-                                                    <option value="{{$status->id}}"@selected($status->id == old('social_situation_id',$formRequest->social_situation_id))>{{$status->situation_desc}}</option>
+                                                    @foreach ($beneficiaries as $beneficiary)
+                                                        <option
+                                                            value="{{ $beneficiary->id }}"@selected(old('beneficiary_id',$formRequest->beneficiary_id) == $beneficiary->id)>
+                                                            {{ $beneficiary->name }}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">عدد الأولاد</label>
-                                                <input type="number" class="form-control @error('children_no') is-invalid @enderror" name="children_no" placeholder="عدد الأولاد" value="{{ old('children_no',$formRequest->children_no) }}"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">العنوان</label>
-                                                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" placeholder="العنوان" value="{{ old('address',$formRequest->address) }}" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <hr>
-                                        </div>
-                                        <div class="col-12">
-                                            <h5>
-                                                المعلومات البنكية
-                                            </h5>
-                                        </div>
-
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">حساب بنكي ؟</label>
-                                                <select name="is_bank_account" class="form-control @error('is_bank_account') is-invalid @enderror" required>
-                                                    <option value="">إختار</option>
-                                                    <option value="0" @selected(old('is_bank_account',$formRequest->is_bank_account) == 0)>لا</option>
-                                                    <option value="1" @selected(old('is_bank_account',$formRequest->is_bank_account) == 1)>نعم</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-4 bank_id d-none">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">اسم البنك</label>
-                                                <select name="bank_id" class="form-control @error('bank_id') is-invalid @enderror">
-                                                    <option value="">إختار</option>
-                                                    @foreach ($banks as $bank)
-                                                    <option value="{{$bank->id}}" @selected(old('bank_id',$formRequest->bank_id) == $bank->id)>{{$bank->bank_name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-4 branch_name d-none">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">اسم الفرع</label>
-                                                <input type="text" class="form-control @error('branch_name') is-invalid @enderror" name="branch_name" placeholder="اسم الفرع" value="{{ old('branch_name',$formRequest->branch_name) }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-4 account_no d-none">
-                                            <div class="form-group">
-                                                <label for="first-name-vertical">رقم الحساب</label>
-                                                <input type="number" class="form-control @error('account_no') is-invalid @enderror" name="account_no" placeholder="رقم الحساب" value="{{ old('account_no',$formRequest->account_no) }}">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -235,6 +135,28 @@
                                         </div>
                                         <div class="col-12">
                                             <h5>
+                                                مؤسسة التمويل
+                                            </h5>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="first-name-vertical">مؤسسة التمويل</label>
+                                                <select name="mfi_provider_id"
+                                                    class="form-control @error('mfi_provider_id') is-invalid @enderror">
+                                                    <option value="">إختار</option>
+                                                    @foreach ($mfis as $key => $mfi)
+                                                        <option
+                                                            value="{{ $mfi->id }}"@selected(old('mfi_provider_id',$mfi->mfi_provider_id) == $mfi->id)>
+                                                            {{ $mfi->name_ar }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <hr>
+                                        </div>
+                                        <div class="col-12">
+                                            <h5>
                                                 ملفات
                                             </h5>
                                         </div>
@@ -293,6 +215,7 @@
                                                 {{-- <div id="current">Nothing yet...</div> --}}
                                             </div>
                                         </div>
+
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-success mr-1 mb-1">تعديل</button>
                                         </div>
@@ -314,9 +237,9 @@
             $('.ckeditor').ckeditor();
         });
     </script>
-    <script
-        src="https://maps.google.com/maps/api/js?key=AIzaSyCgBcmRxPDyddm0cL8jqRm9ZMGKRtFpw78&libraries=places&callback=initAutocomplete"
-        type="text/javascript"></script>
+<script
+src="https://maps.google.com/maps/api/js?key=AIzaSyA-CFZMuoj6iTzpFJCGUrQUmrQuuw-ZZiE&libraries=places&callback=initAutocomplete"
+type="text/javascript"></script>
 
     <script>
         $(document).ready(function() {

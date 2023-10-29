@@ -69,8 +69,7 @@
                                                 <label for="first-name-vertical">البريد الألكتروني</label>
                                                 <input type="email"
                                                     class="form-control @error('email') is-invalid @enderror"
-                                                    name="email" placeholder="البريد الألكتروني" value="{{ old('email',$beneficiary->email) }}"
-                                                    required>
+                                                    name="email" placeholder="البريد الألكتروني" value="{{ old('email',$beneficiary->email) }}">
                                             </div>
                                         </div>
                                         <div class="col-4">
@@ -240,8 +239,8 @@
         });
     </script>
     <script
-        src="https://maps.google.com/maps/api/js?key=AIzaSyCgBcmRxPDyddm0cL8jqRm9ZMGKRtFpw78&libraries=places&callback=initAutocomplete"
-        type="text/javascript"></script>
+    src="https://maps.google.com/maps/api/js?key=AIzaSyA-CFZMuoj6iTzpFJCGUrQUmrQuuw-ZZiE&libraries=places&callback=initAutocomplete"
+    type="text/javascript"></script>
 
     <script>
         $(document).ready(function() {

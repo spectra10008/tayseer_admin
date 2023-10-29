@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('installments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('mfi_provider_id')->constrained('mfi_providers');
             $table->string('payment_receipt_number');
             $table->string('deserved_amount');
             $table->string('amount_paid')->nullable();
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->foreignId('status_id')->constrained('installment_statuses');
             $table->enum('status', ['pending', 'confirmed']);
             $table->string('receipt_file')->nullable();
+            $table->foreignId('added_by')->constrained('users');
             $table->timestamps();
         });
     }

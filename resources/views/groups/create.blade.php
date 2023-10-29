@@ -82,7 +82,7 @@
                                         <div class="col-4 register_type_id d-none">
                                             <div class="form-group">
                                                 <label for="first-name-vertical">نوع التسجيل</label>
-                                                <select name="register_type_id" class="form-control @error('register_type_id') is-invalid @enderror" required>
+                                                <select name="register_type_id" class="form-control @error('register_type_id') is-invalid @enderror">
                                                     <option value="">إختار</option>
                                                     @foreach ($types as $type)
                                                     <option value="{{$type->id}}"@selected($type->id == old('register_type_id '))>{{$type->type_desc}}</option>

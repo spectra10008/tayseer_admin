@@ -77,6 +77,7 @@ class BeneficiaryController extends Controller
 
         $beneficiaries->image = $image_path;
         $beneficiaries->id_image = $id_image_path;
+        $beneficiaries->is_active = 1;
         // end
         $beneficiaries->save();
 
@@ -92,7 +93,7 @@ class BeneficiaryController extends Controller
      */
     public function show($id)
     {
-        $beneficiary = Beneficiary::whereId($id)->with('beneficiary_requests.requests')->first();
+        $beneficiary = Beneficiary::whereId($id)->with('beneficiary_requests')->first();
          return view('beneficiaries.show')
             ->with('beneficiary', $beneficiary)
         ;

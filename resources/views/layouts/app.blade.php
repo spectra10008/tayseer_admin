@@ -31,18 +31,21 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css-rtl/pages/app-user.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/vendors/css/forms/select/select2.min.css') }}">
 
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css"
         href="{{ asset('/app-assets/css-rtl/core/menu/menu-types/vertical-menu.css') }}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css-rtl/custom-rtl.css') }}">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/style-rtl.css') }}">
     <!-- END: Custom CSS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap"
-        rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
 </head>
 <!-- END: Head-->
 
@@ -55,8 +58,9 @@
     h4,
     h5,
     h6,
-    span {
-        font-family: 'Tajawal', sans-serif
+    span,
+    body {
+        font-family: 'Almarai', sans-serif !important;
     }
 </style>
 
@@ -72,94 +76,52 @@
                 <div class="navbar-collapse" id="navbar-mobile">
 
                     <ul class="nav navbar-nav float-left ml-auto">
-                        <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link"
-                                id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span
-                                    class="selected-language">English</span></a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item"
-                                    href="#" data-language="en"><i class="flag-icon flag-icon-us"></i>
-                                    English</a><a class="dropdown-item" href="#" data-language="fr"><i
-                                        class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item"
-                                    href="#" data-language="de"><i class="flag-icon flag-icon-de"></i>
-                                    German</a><a class="dropdown-item" href="#" data-language="pt"><i
-                                        class="flag-icon flag-icon-pt"></i> Portuguese</a></div>
-                        </li>
+                        {{-- <li class="dropdown dropdown-language nav-item">
+                            <a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span
+                                    class="selected-language">English</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-flag">
+                                <a class="dropdown-item" href="#" data-language="en"><i
+                                        class="flag-icon flag-icon-us"></i>
+                                    English</a>
+                            </div>
+                        </li> --}}
                         <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i
                                     class="ficon feather icon-maximize"></i></a></li>
-                        <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label"
+                        <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label read_all"
                                 href="#" data-toggle="dropdown"><i class="ficon feather icon-bell"></i><span
-                                    class="badge badge-pill badge-primary badge-up">5</span></a>
+                                    class="badge badge-pill badge-up notify_count"
+                                    style="background-color: #e1141b">{{ $new_notifications->count() }}</span></a>
                             <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                 <li class="dropdown-menu-header">
                                     <div class="dropdown-header m-0 p-2">
-                                        <h3 class="white">5 جديدة</h3><span class="grey darken-2">إشعارات
-                                            التطبيق</span>
+                                        <h3 class="white notify_count_new">{{ $new_notifications->count() }} </h3>
+                                        <span class="grey darken-2">
+                                            اشعارات التطبيق جديدة </span>
                                     </div>
                                 </li>
                                 <li class="scrollable-container media-list">
-                                    <a class="d-flex justify-content-between" href="javascript:void(0)">
-                                        <div class="media d-flex align-items-start">
-                                            <div class="media-left"><i
-                                                    class="feather icon-plus-square font-medium-5 primary"></i></div>
-                                            <div class="media-body">
-                                                <h6 class="primary media-heading">You have new order!</h6><small
-                                                    class="notification-text"> Are your going to meet me
-                                                    tonight?</small>
-                                            </div><small>
-                                                <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">9 hours
-                                                    ago</time></small>
-                                        </div>
-                                    </a><a class="d-flex justify-content-between" href="javascript:void(0)">
-                                        <div class="media d-flex align-items-start">
-                                            <div class="media-left"><i
-                                                    class="feather icon-download-cloud font-medium-5 success"></i>
+                                    @foreach ($new_notifications as $new_notification)
+                                        <a class="d-flex justify-content-between" href="javascript:void(0)">
+                                            <div class="media d-flex align-items-start">
+                                                <div class="media-left"><i
+                                                        class="feather icon-plus-square font-medium-5 primary"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="primary media-heading">{{ $new_notification->title }}
+                                                    </h6><small class="notification-text">
+                                                        {{ $new_notification->content }}</small>
+                                                </div><small>
+                                                    <time class="media-meta"
+                                                        datetime="2015-06-11T18:29:20+08:00">{{ $new_notification->created_at->diffForHumans() }}</time></small>
                                             </div>
-                                            <div class="media-body">
-                                                <h6 class="success media-heading red darken-1">99% Server load</h6>
-                                                <small class="notification-text">You got new order of goods.</small>
-                                            </div><small>
-                                                <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">5 hour
-                                                    ago</time></small>
-                                        </div>
-                                    </a><a class="d-flex justify-content-between" href="javascript:void(0)">
-                                        <div class="media d-flex align-items-start">
-                                            <div class="media-left"><i
-                                                    class="feather icon-alert-triangle font-medium-5 danger"></i></div>
-                                            <div class="media-body">
-                                                <h6 class="danger media-heading yellow darken-3">Warning notifixation
-                                                </h6><small class="notification-text">Server have 99% CPU
-                                                    usage.</small>
-                                            </div><small>
-                                                <time class="media-meta"
-                                                    datetime="2015-06-11T18:29:20+08:00">Today</time></small>
-                                        </div>
-                                    </a><a class="d-flex justify-content-between" href="javascript:void(0)">
-                                        <div class="media d-flex align-items-start">
-                                            <div class="media-left"><i
-                                                    class="feather icon-check-circle font-medium-5 info"></i></div>
-                                            <div class="media-body">
-                                                <h6 class="info media-heading">Complete the task</h6><small
-                                                    class="notification-text">Cake sesame snaps cupcake</small>
-                                            </div><small>
-                                                <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last
-                                                    week</time></small>
-                                        </div>
-                                    </a><a class="d-flex justify-content-between" href="javascript:void(0)">
-                                        <div class="media d-flex align-items-start">
-                                            <div class="media-left"><i
-                                                    class="feather icon-file font-medium-5 warning"></i></div>
-                                            <div class="media-body">
-                                                <h6 class="warning media-heading">Generate monthly report</h6><small
-                                                    class="notification-text">Chocolate cake oat cake tiramisu
-                                                    marzipan</small>
-                                            </div><small>
-                                                <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">Last
-                                                    month</time></small>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    @endforeach
+
                                 </li>
                                 <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center"
-                                        href="javascript:void(0)">قراءة كل الاشعارات</a></li>
+                                        href="/panel-admin/notifications">قراءة كل الاشعارات</a></li>
                             </ul>
                         </li>
                         <li class="dropdown dropdown-user nav-item"><a
@@ -172,7 +134,7 @@
                                         width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
-                                    href="/panel-admin/edit_profile"><i class="feather icon-user"></i> تعديل
+                                    href="/panel-admin/edit_profile"><i class="feather icon-user"></i>
                                     البروفايل</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item"
                                     href="{{ route('logout') }}"
@@ -211,32 +173,41 @@
         <div class="main-menu-content" style="margin-top: 10px">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 <li class="nav-item  {{ request()->is('panel-admin/dashboard') ? 'active' : '' }}"><a
-                        href="/admin/dashboard"><i class="feather icon-home"></i><span class="menu-title"
+                        href="/panel-admin/dashboard"><i class="feather icon-home"></i><span class="menu-title"
                             data-i18n="Dashboard">الرئيسية</span></a>
                 </li>
+                @if(Auth::user()->user_type_id == 1)
+                <li class=" navigation-header"><span>المستخدمين</span>
+                </li>
+                <li class="nav-item {{ request()->is('panel-admin/beneficiaries') ? 'active' : '' }}"><a
+                        href="/panel-admin/beneficiaries"><i class="fa fa-users"></i><span class="menu-title"
+                            data-i18n="Email">المستفيدين</span></a>
+                </li>
+                <li class="nav-item {{ request()->is('panel-admin/mfis') ? 'active' : '' }}"><a
+                        href="/panel-admin/mfis"><i class="fa fa-industry"></i><span class="menu-title"
+                            data-i18n="Email">مؤسسات التمويل</span></a>
+                </li>
+                @endif
                 <li class=" navigation-header"><span>القائمة</span>
                 </li>
                 <li class="nav-item {{ request()->is('panel-admin/form-requets') ? 'active' : '' }}"><a
                         href="/panel-admin/form-requets"><i class="fa fa-file-text-o"></i><span class="menu-title"
                             data-i18n="Email">طلبات التمويل</span></a>
                 </li>
+                @if(Auth::user()->user_type_id == 1)
                 <li class="nav-item {{ request()->is('panel-admin/loans') ? 'active' : '' }}"><a
                         href="/panel-admin/loans"><i class="fa fa-folder-open"></i><span class="menu-title"
                             data-i18n="Email">القروض</span></a>
-                </li>
-                <li class="nav-item {{ request()->is('panel-admin/beneficiaries') ? 'active' : '' }}"><a
-                        href="/panel-admin/beneficiaries"><i class="fa fa-users"></i><span class="menu-title"
-                            data-i18n="Email">المستفيدين</span></a>
                 </li>
 
                 <li class="nav-item {{ request()->is('panel-admin/projects') ? 'active' : '' }}"><a
                         href="/panel-admin/projects"><i class="fa fa-gavel"></i><span class="menu-title"
                             data-i18n="Email">المشاريع</span></a>
                 </li>
-                <li class="nav-item {{ request()->is('panel-admin/groups') ? 'active' : '' }}"><a
+                {{-- <li class="nav-item {{ request()->is('panel-admin/groups') ? 'active' : '' }}"><a
                         href="/panel-admin/groups"><i class="fa fa-list-ul"></i><span class="menu-title"
                             data-i18n="Email">المجموعات</span></a>
-                </li>
+                </li> --}}
                 <li class="nav-item {{ request()->is('panel-admin/installments') ? 'active' : '' }}"><a
                         href="/panel-admin/installments"><i class="fa fa-money"></i><span class="menu-title"
                             data-i18n="Email">الأقساط</span></a>
@@ -245,6 +216,7 @@
                         href="/panel-admin/vendors"><i class="fa fa-shopping-cart"></i><span class="menu-title"
                             data-i18n="Email">التجار</span></a>
                 </li>
+
                 <li class=" navigation-header"><span>الإعدادات</span>
                 </li>
                 <li class="nav-item {{ request()->is('panel-admin/loans-products') ? 'active' : '' }}"><a
@@ -271,15 +243,16 @@
                         href="/panel-admin/social-situations"><i class="fa fa-square-o"></i><span class="menu-title"
                             data-i18n="Email">الحالات الاجتماعية</span></a>
                 </li>
-                <li class="nav-item {{ request()->is('panel-admin/users') ? 'active' : '' }}"><a
+                {{-- <li class="nav-item {{ request()->is('panel-admin/users') ? 'active' : '' }}"><a
                         href="/panel-admin/users"><i class="fa fa-lock"></i><span class="menu-title"
                             data-i18n="Email">الصلاحيات</span></a>
-                </li>
+                </li> --}}
                 <li class="nav-item {{ request()->is('panel-admin/users') ? 'active' : '' }}"><a
                         href="/panel-admin/users"><i class="fa fa-users"></i><span class="menu-title"
                             data-i18n="Email">مستخدمين
                             النظام</span></a>
                 </li>
+                @endif
             </ul>
         </div>
     </div>
@@ -316,6 +289,8 @@
     <script src="{{ asset('/app-assets/vendors/js/vendors.min.js') }}"></script>
     <script src="{{ asset('/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
     <!-- BEGIN Vendor JS-->
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+
 
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{ asset('/app-assets/vendors/js/ui/prism.min.js') }}"></script>
@@ -333,18 +308,39 @@
     <script src="{{ asset('/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
     <script src="{{ asset('/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
+
+
     <!-- BEGIN: Theme JS-->
     <script src="{{ asset('/app-assets/js/core/app-menu.js') }}"></script>
     <script src="{{ asset('/app-assets/js/core/app.js') }}"></script>
     <script src="{{ asset('/app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+
     <!-- BEGIN: Page JS-->
     <script src="{{ asset('/app-assets/js/scripts/datatables/datatable.js') }}"></script>
+    <script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'yyyy-mm-dd'
+        });
+
+        $('#datepicker2').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'yyyy-mm-dd'
+        });
+    </script>
     <!-- END: Page JS-->
     <!-- END: Theme JS-->
     @yield('scriptjs')
     <!-- BEGIN: Page JS-->
     <!-- END: Page JS-->
-
+    <script>
+        $(".read_all").click(function() {
+            $.get("/panel-admin/notifications_read", function(data, status) {
+                console.log('success')
+                $('.notify_count').text(0);
+            });
+        });
+    </script>
 </body>
 <!-- END: Body-->
 

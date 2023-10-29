@@ -161,14 +161,22 @@ class ProjectController extends Controller
 
     public function add_beneficiaries_project(Request $request)
     {
-        $beneficiary_ids = $request->beneficiary_id;
-        foreach($beneficiary_ids as $beneficiary_id)
-        {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|string|unique:beneficiary_projects,email',
+            'phone' => 'required|numeric|unique:beneficiary_projects,email',
+            'age' => 'required|numeric',
+            'address' => 'required|string|max:255',
+        ]);
+
             $beneficiary_project = new BeneficiaryProject();
-            $beneficiary_project->beneficiary_id = $beneficiary_id;
             $beneficiary_project->project_id = $request->project_id;
+            $beneficiary_project->name = $request->name;
+            $beneficiary_project->email = $request->email;
+            $beneficiary_project->phone = $request->phone;
+            $beneficiary_project->age = $request->age;
+            $beneficiary_project->address = $request->address;
             $beneficiary_project->save();
-        }
 
         toastr()->success('تم الإضافة بنجاح !!');
         return back();

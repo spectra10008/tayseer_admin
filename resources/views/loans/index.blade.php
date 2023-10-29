@@ -51,22 +51,25 @@
                                             <td>{{ $loan->loan_no }}</td>
                                             <td>{{ $loan->request_id }}</td>
                                             <td>{{ $loan->product->product_name }}</td>
-                                            <td>{{ $loan->status->status_desc }}</td>
-                                            <td>{{ $loan->loan_amount }}</td>
-                                            <td>{{ $loan->released_date }}</td>
-                                            <td>{{ $loan->created_at }}</td>
                                             <td>
-                                                <a href="/panel-admin/loans/{{$loan->id}}/edit" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                                <button class="btn btn-danger mr-2"
-                                                    onclick="if(confirm('هل أنت متأكد ؟')){document.getElementById('delete-users_{{ $loan->id }}').submit();}else{
-                                            event.preventDefault();}"><i
-                                                        class="fa fa-trash"></i></button>
-                                                <form id="delete-users_{{ $loan->id }}"
-                                                    action="/panel-admin/loans/{{ $loan->id }}" method="POST"
-                                                    class="d-none">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
+                                                @if ($loan->status_id == 1)
+                                                <span class="badge badge-info">{{$loan->status->status_desc}}</span>
+                                                @elseif($loan->status_id == 2)
+                                                <span class="badge badge-success">
+                                                    {{$loan->status->status_desc}}</span>
+                                                @elseif($loan->status_id == 3)
+                                                    <span class="badge badge-danger">
+                                                        {{$loan->status->status_desc}}</span>
+                                                @elseif($loan->status_id == 4)
+                                                <span class="badge badge-light">{{$loan->status->status_desc}}</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $loan->loan_amount }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($loan->released_date)->format('Y-m-d') }}</td>
+                                            <td>{{ $loan->created_at->format('Y-m-d') }}</td>
+                                            <td>
+                                                <a href="/panel-admin/loans/{{$loan->id}}" class="btn btn-info"><i class="fa fa-info"></i></a>
+
                                             </td>
                                         </tr>
                                     @endforeach

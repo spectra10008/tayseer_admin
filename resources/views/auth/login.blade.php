@@ -28,8 +28,7 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css"
         href="{{ asset('/app-assets/css-rtl/core/menu/menu-types/vertical-menu.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('/app-assets/css-rtl/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css-rtl/core/colors/palette-gradient.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css-rtl/pages/authentication.css') }}">
     <!-- END: Page CSS-->
 
@@ -37,11 +36,23 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css-rtl/custom-rtl.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/style-rtl.css') }}">
     <!-- END: Custom CSS-->
+    <!-- END: Custom CSS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <style>
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        span,
+        body {
+            font-family: 'Almarai', sans-serif !important;
+        }
+    </style>
 </head>
 <!-- END: Head-->
 
@@ -123,7 +134,7 @@
                                                                 </div>
                                                             </fieldset>
                                                         </div>
-                                                        <div class="text-right"><a href="/admin/forgot-password"
+                                                        <div class="text-right"><a href="/panel-admin/forgot-password"
                                                                 class="card-link">نسيت كلمة السر ؟</a></div>
                                                     </div>
                                                     <button type="submit"

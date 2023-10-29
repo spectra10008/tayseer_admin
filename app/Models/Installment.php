@@ -19,8 +19,18 @@ class Installment extends Model
         return $this->belongsTo(FormRequest::class,'request_id','id');
     }
 
-    public function status()
+    public function loan()
+    {
+        return $this->belongsTo(Loan::class,'loan_id','id');
+    }
+
+    public function ins_status()
     {
         return $this->hasOne(InstallmentStatus::class,'id','status_id');
+    }
+
+    public function mfis()
+    {
+        return $this->belongsTo(MfiProvider::class,'mfi_provider_id','id');
     }
 }

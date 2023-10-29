@@ -26,7 +26,7 @@ class UpdateBeneficiaryRequest extends FormRequest
         return [
             'name' => 'required|max:255|string',
             'gender' => 'required|max:255|string',
-            'email' => 'required|max:255|email',
+            'email' => 'nullable|max:255|email',
             'phone' => 'required|numeric|digits_between:9,12',
             'age' => 'required|numeric',
             'id_number' => 'required|numeric',

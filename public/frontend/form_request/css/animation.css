@@ -1,0 +1,11 @@
+@keyframes down-up {
+    from {
+        transform: translateY(0%);
+        box-shadow: 0px 0px 0px #0000;
+    }
+
+    to {
+        transform: translateY(-10%);
+        box-shadow: 0px 5px 15px #111;
+    }
+}

@@ -40,6 +40,7 @@ return new class extends Migration
             $table->string('personal_image');
             $table->string('id_file');
             $table->foreignId('status_id')->constrained('form_request_statuses')->default(1);
+            $table->foreignId('mfi_provider_id')->constrained('mfi_providers')->nullable();
             $table->timestamps();
         });
     }

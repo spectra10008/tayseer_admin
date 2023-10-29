@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'mfis_providers' => [
+            'driver' => 'session',
+            'provider' => 'mfis_providers',
+        ],
     ],
 
     /*
@@ -64,7 +68,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'mfis_providers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MfiProviderUser::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -89,6 +96,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'mfis_providers' => [
+            'provider' => 'mfis_providers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

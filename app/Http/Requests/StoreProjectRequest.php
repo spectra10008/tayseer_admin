@@ -28,7 +28,7 @@ class StoreProjectRequest extends FormRequest
             'status' => 'required|max:255|string',
             'address' => 'required|max:255|string',
             'sector_id' => 'required|numeric|exists:sectors,id',
-            'start_date' => 'required|string|max:255',
+            'start_date' => 'nullable|string|max:255',
             'desc' => 'required|string',
             'need' => 'required|string',
             'notes' => 'required|string',
